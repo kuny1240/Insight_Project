@@ -1,0 +1,10 @@
+---
+instances:
+  - region: us-west-2
+    instance: visor-master
+  - region: us-west-2
+    instance: visor-read
+  - region: us-west-2
+    instance: visor-read-2
+  - region: us-west-2
+    instance: visor-metrics

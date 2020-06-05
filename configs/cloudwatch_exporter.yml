@@ -1,0 +1,13 @@
+---
+region: us-west-2
+set_timestamp: false
+metrics:
+ - aws_namespace: AWS/Logs
+   aws_metric_name: IncomingLogEvents
+   aws_dimensions: [LogGroupName]
+   aws_statistics: [Average]
+
+ - aws_namespace: AWS/Logs
+   aws_metric_name: IncomingBytes
+   aws_dimensions: [LogGroupName]
+   aws_statistics: [Average]

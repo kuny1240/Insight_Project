@@ -1,0 +1,31 @@
+---
+groups:
+ - name: rds
+   rules:
+   - alert: ExporterDown
+     expr: up == 0
+     for: 1m
+     labels:
+       severity: warning
+     annotations:
+      description: '{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 1 minutes.'
+      summary: 'Instance {{ $labels.instance }} down.'
+
+   - alert: CPUUsageHigh
+     expr: rdsosmetrics_cpuUtilization_total >= 40
+     for: 10s
+     labels:
+       severity: warning
+     annotations:
+       description: '{{ $labels.instance }} has a high CPUUsage for 10s, there might be a spike traffic coming'
+       summary: 'Spike traffic on {{ $labels.instance }}.'
+
+   - alert: SlowQueryInLine
+     expr: aws_logs_incoming_log_events_average{log_group_name=~".*slowquery"} > 0
+     for: 30s
+     labels:
+       severity: page
+     annotations:
+       description: '{{ $labels.log_group_name }} has a high slowqueries for more than 30s, please go to the cloudwatch dashboard at console.aws.com/cloudwatch'
+       summary: 'Spike traffic on {{ $labels.log_group_name }}.'
+
